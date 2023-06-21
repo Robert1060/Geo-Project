@@ -1,0 +1,10 @@
+$primary-bg: #3f51b5;
+
+.navbar{
+  height: 5rem;
+  width: 100vw;
+  background-color:$primary-bg;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
