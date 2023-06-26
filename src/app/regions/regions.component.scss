@@ -1,0 +1,22 @@
+.regions-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+
+}
+.region {
+  margin: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 30rem;
+  max-height: 10rem;
+  width: 20rem;
+  height: 20rem;
+}
+.region:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
