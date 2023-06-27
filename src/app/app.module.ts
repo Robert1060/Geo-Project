@@ -12,6 +12,10 @@ import { MatCardModule } from '@angular/material/card';
 import { RegionsRoutingModule } from './regions/regions-routing.module';
 import { RegionCountriesComponent } from './countries/countries.component';
 import { LetModule } from '@ngrx/component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CountryInfoComponent } from './coutry-info/coutry-info.component';
+import { CountriesRoutingModule } from './countries/countries-routing.module';
 
 
 @NgModule({
@@ -19,18 +23,22 @@ import { LetModule } from '@ngrx/component';
     AppComponent,
     NavbarComponent,
     RegionsComponent,
-    RegionCountriesComponent
+    RegionCountriesComponent,
+    CountryInfoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RegionsRoutingModule,
+    CountriesRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MatIconModule,
     MatButtonModule,
     MatCardModule,
-    LetModule
+    LetModule,
+    MatToolbarModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

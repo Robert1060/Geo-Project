@@ -12,7 +12,10 @@ export class GeoDataService {
 
 
   public getCountries(region: string) {
-    return this.httpClient.get<ExtendedCountry[]>(`https://restcountries.com/v3.1/region/${region}`)
+    return this.httpClient.get<any[]>(`https://restcountries.com/v3.1/region/${region}?fields=name,flag`)
+  }
+  public getCountryInfo(country: string) {
+    return this.httpClient.get<any[]>(`https://restcountries.com/v3.1/name/${country}?fields=flag,name,currencies,capital,population`)
   }
 
 }

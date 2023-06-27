@@ -7,8 +7,8 @@ export interface Regions {
 }
 
 export interface Country {
-Name: string,
-Flag: string,
+  Name: string,
+  Flag: string,
 }
 
 export interface ExtendedCountry extends Country {
