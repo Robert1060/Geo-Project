@@ -1,5 +1,13 @@
-<p>coutry-info works!</p>
 <ng-container *ngrxLet="countryInfo$ as info">
-  {{country}}
-  <p>{{info | json}}</p>
+  <h2 class="header">country: {{ country }}</h2>
+  <div class="table" *ngFor="let countryInfo of info">
+    <div class="countries">
+      <!-- {{ countryInfo | json }} -->
+      <span>{{ countryInfo.fifa }}</span>
+      <span class="flag">{{ countryInfo.flag }}</span>
+      <span>{{ countryInfo.name.common }}</span>
+      <span>{{ countryInfo.capital }}</span>
+      <span>{{ countryInfo.currencies[0] }}</span>
+    </div>
+  </div>
 </ng-container>

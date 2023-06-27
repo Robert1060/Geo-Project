@@ -1,11 +1,15 @@
 <ng-container *ngrxLet="countries$ as countries">
-  <h2 class="header">region: {{region}}</h2>
+  <h2 class="header">region: {{ region }}</h2>
   <div class="table">
     <div class="countries">
       <mat-spinner *ngIf="loading" class="spinner"></mat-spinner>
-      <a *ngFor="let country of countries" class="country pointer" [routerLink]="country.name.common">
-        <span class="flag">{{country.flag}}</span>
-        <span>{{country.name.common}}</span>
+      <a
+        *ngFor="let country of countries"
+        class="country pointer"
+        [routerLink]="country.name.common"
+      >
+        <span class="flag">{{ country.flag }}</span>
+        <span>{{ country.name.common }}</span>
       </a>
     </div>
   </div>

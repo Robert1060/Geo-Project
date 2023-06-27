@@ -1,9 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import '@angular/material/prebuilt-themes/indigo-pink.css';
-@import '@angular/cdk/overlay-prebuilt.css';
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+@import "@angular/cdk/overlay-prebuilt.css";
 
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 a {
   text-decoration: none;
@@ -11,4 +14,30 @@ a {
 
 .pointer {
   cursor: pointer;
+}
+.table {
+  position: absolute;
+  top: 20vh;
+  left: 30vw;
+  height: 60vh;
+  width: 40vw;
+  border: 1px solid grey;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.header {
+  position: absolute;
+  top: 10vh;
+  left: 20vw;
+  text-transform: capitalize;
+}
+
+@media screen and (max-width: 900px) {
+  .table {
+    left: 15vw;
+    width: 70vw;
+  }
+  .header {
+    left: 10vw;
+  }
 }

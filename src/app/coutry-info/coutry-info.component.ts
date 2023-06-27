@@ -6,24 +6,24 @@ import { GeoDataService } from '../services/geo-data.service';
 @Component({
   selector: 'app-coutry-info',
   templateUrl: './coutry-info.component.html',
-  styleUrls: ['./coutry-info.component.scss']
+  styleUrls: ['./coutry-info.component.scss'],
 })
 export class CountryInfoComponent implements OnInit {
-  country = ''
-  countryInfo$: Observable<any[]> = of([])
+  country = '';
+  countryInfo$: Observable<any> = of();
 
-  constructor(private activatedRoute: ActivatedRoute, private geoService: GeoDataService) {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private geoService: GeoDataService
+  ) {}
 
   ngOnInit(): void {
     this.countryInfo$ = this.activatedRoute.params.pipe(
-      map(x => x['country']),
+      map((x) => x['country']),
       switchMap((country) => {
-        console.log(country)
-        this.country = country
-        return this.geoService.getCountryInfo(country)
+        this.country = country;
+        return this.geoService.getCountryInfo(country);
       })
-    )
-    console.log(this.country)
+    );
   }
-
 }
