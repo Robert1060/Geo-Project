@@ -1,18 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RegionsComponent } from './regions.component';
-import { NavbarComponent } from '../components/navbar/navbar.component';
 import { RegionCountriesComponent } from '../countries/countries.component';
+import { NotFoundComponent } from '../components/not-found/not-found.component';
+import { CountriesRoutingModule } from '../countries/countries-routing.module';
 
 const routes: Routes = [
   {
     path: 'regions/:region',
-    component: RegionCountriesComponent
-  }
+    pathMatch: 'full',
+    component: RegionCountriesComponent,
+  },
 ];
 
-@NgModule({ 
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+@NgModule({
+  imports: [CountriesRoutingModule, RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
-export class RegionsRoutingModule { }
+export class RegionsRoutingModule {}

@@ -2,7 +2,7 @@
   <mat-toolbar-row>
     <mat-icon>people</mat-icon>
     <span class="spacer"></span>
-    <button mat-raised-button>
+    <button mat-raised-button (click)="goBack()" [disabled]="isRootPage">
       <mat-icon>arrow_back</mat-icon>
       Go back
     </button>

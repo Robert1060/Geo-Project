@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RegionsComponent } from './regions/regions.component';
+import { RegionsRoutingModule } from './regions/regions-routing.module';
 
 const routes: Routes = [
   // {
@@ -11,16 +12,17 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: 'regions',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'regions',
-    component: RegionsComponent
-  }
+    component: RegionsComponent,
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [RegionsRoutingModule, RouterModule.forRoot(routes)],
+
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

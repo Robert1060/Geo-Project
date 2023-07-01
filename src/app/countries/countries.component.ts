@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, map, of, switchMap } from 'rxjs';
+import { Observable, finalize, map, of, switchMap, take } from 'rxjs';
 import { GeoDataService } from '../services/geo-data.service';
 import { BaseCountryData } from '../models/model';
 
@@ -11,9 +11,9 @@ import { BaseCountryData } from '../models/model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegionCountriesComponent implements OnInit {
-  countries$: Observable<BaseCountryData[]> = of([]);
-  region: string = '';
-  loading = true;
+  countries$: Observable<BaseCountryData[]>;
+  region: string;
+  isDataLoading: boolean;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -22,13 +22,14 @@ export class RegionCountriesComponent implements OnInit {
 
   ngOnInit(): void {
     this.countries$ = this.activatedRoute.params.pipe(
+      take(1),
       map((x) => x['region']),
-      switchMap((region) => {
+      switchMap((region: string) => {
         this.region = region;
         const countries$ = this.geoService.getCountries(region);
-        this.loading = false;
         return countries$;
-      })
+      }),
+      finalize(() => (this.isDataLoading = false))
     );
   }
 }

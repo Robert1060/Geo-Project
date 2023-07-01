@@ -1,12 +1,12 @@
-import { Regions } from "../models/model";
+import { Regions } from '../models/model';
 
 export default class RegionService {
   static regions: Regions = {
-    Africa: 'Africa',
-    Asia: 'Asia',
-    Europe: 'Europe',
-    America: 'America',
-    Oceania: 'Oceania'
-  }
+    Africa: 'africa',
+    Asia: 'asia',
+    Europe: 'europe',
+    America: 'america',
+    Oceania: 'oceania',
+  };
   constructor() {}
 }

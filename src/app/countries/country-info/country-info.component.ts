@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, finalize, map, of, switchMap, take } from 'rxjs';
 import { GeoDataService } from '../../services/geo-data.service';
@@ -8,11 +8,12 @@ import { Currency, ExtendedCountryData } from '../../models/model';
   selector: 'app-country-info',
   templateUrl: './country-info.component.html',
   styleUrls: ['./country-info.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CountryInfoComponent implements OnInit {
-  country = '';
-  countryInfo$: Observable<ExtendedCountryData[]> = of();
-  isDataLoading = true;
+  country: string;
+  countryInfo$: Observable<ExtendedCountryData[]>;
+  isDataLoading: boolean;
 
   constructor(
     private activatedRoute: ActivatedRoute,

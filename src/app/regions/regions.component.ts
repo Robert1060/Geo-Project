@@ -7,7 +7,7 @@ import RegionService from '../services/region.service';
   styleUrls: ['./regions.component.scss'],
 })
 export class RegionsComponent implements OnInit {
-  public regions: string[] | [] = [];
+  public regions: string[];
 
   constructor() {}
 
