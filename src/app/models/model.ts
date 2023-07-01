@@ -6,10 +6,24 @@ export interface Regions {
   Oceania: string;
 }
 
+export interface Currency {
+  name: string;
+  symbol: string;
+}
+
 export interface BaseCountryData {
   name: {
     common: string;
     official: string;
   };
-  flag: any;
+  flag: string;
+}
+
+export interface ExtendedCountryData extends BaseCountryData {
+  currencies: {
+    [currencyCode: string]: Currency;
+  };
+  capital: string;
+  fifa: string;
+  population: number;
 }

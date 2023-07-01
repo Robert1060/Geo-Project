@@ -1,0 +1,23 @@
+<mat-spinner class="spinner" *ngIf="isDataLoading"></mat-spinner>
+<ng-container *ngrxLet="countryInfo$ as info">
+  <h2 class="header">country: {{ country }}</h2>
+  <div class="table" *ngFor="let countryInfo of info">
+    <div class="countries">
+      <!-- {{ countryInfo | json }} -->
+      <div class="label">
+        <span>{{ countryInfo.flag }}</span>
+        <span>{{ countryInfo.fifa }}</span>
+      </div>
+      <span class="label">Capital: {{ countryInfo.capital }}</span>
+      <span class="label"
+        >currency: {{ getCurrency(countryInfo).name }}
+        symbol:
+        {{ getCurrency(countryInfo).symbol }}
+      </span>
+      <span class="label"
+        >population:
+        {{ convertToMillions(countryInfo.population, 2, true) }}</span
+      >
+    </div>
+  </div>
+</ng-container>

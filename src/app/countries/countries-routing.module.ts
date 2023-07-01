@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CountryInfoComponent } from '../coutry-info/coutry-info.component';
+import { CountryInfoComponent } from './country-info/country-info.component';
 
 const routes: Routes = [
   {
     path: 'regions/:region/:country',
-    component: CountryInfoComponent
-  }
+    component: CountryInfoComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class CountriesRoutingModule { }
+export class CountriesRoutingModule {}

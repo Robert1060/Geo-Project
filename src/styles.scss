@@ -41,3 +41,11 @@ a {
     left: 10vw;
   }
 }
+
+.spinner {
+  position: absolute;
+  width: 5rem;
+  height: 5rem;
+  left: calc(50vw - 5rem);
+  top: calc(50vh - 5rem);
+}

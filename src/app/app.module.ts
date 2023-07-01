@@ -14,9 +14,9 @@ import { RegionCountriesComponent } from './countries/countries.component';
 import { LetModule } from '@ngrx/component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { CountryInfoComponent } from './coutry-info/coutry-info.component';
+import { CountryInfoComponent } from './countries/country-info/country-info.component';
 import { CountriesRoutingModule } from './countries/countries-routing.module';
-
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,8 @@ import { CountriesRoutingModule } from './countries/countries-routing.module';
     NavbarComponent,
     RegionsComponent,
     RegionCountriesComponent,
-    CountryInfoComponent
+    CountryInfoComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,9 +39,9 @@ import { CountriesRoutingModule } from './countries/countries-routing.module';
     MatCardModule,
     LetModule,
     MatToolbarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
