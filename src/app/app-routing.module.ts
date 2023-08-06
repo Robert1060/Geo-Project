@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { RegionsComponent } from './regions/regions.component';
 import { RegionsRoutingModule } from './regions/regions-routing.module';
 
-const routes: Routes = [
+export const routes: Routes = [
   // {
   //   path: '**',
   //   pathMatch: 'full',

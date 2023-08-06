@@ -18,6 +18,9 @@ import { FooterComponent } from './components/footer/footer.component';
 import { AboutMeDialogComponent } from './components/about-me-dialog/about-me-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { StoreModule } from '@ngrx/store';
+import { regionsReducer } from './regions/regions-store/regions.reducer';
+import { appConfig } from './app-config';
 
 @NgModule({
   declarations: [
@@ -42,6 +45,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     MatToolbarModule,
     MatProgressSpinnerModule,
     MatDialogModule,
+    StoreModule.forRoot(regionsReducer),
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,6 +1,6 @@
 <mat-spinner *ngIf="isDataLoading" class="spinner"></mat-spinner>
 <ng-container *ngrxLet="countries$ as countries">
-  <h2 class="header">region: {{ region }}</h2>
+  <h2 class="header">region: {{ selectedRegion$ | async }}</h2>
   <div class="table">
     <div class="countries">
       <a

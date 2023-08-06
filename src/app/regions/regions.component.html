@@ -3,6 +3,7 @@
     *ngFor="let region of regions"
     class="region pointer"
     routerLink="{{ region.toLowerCase() }}"
+    (click)="chooseRegion(region)"
   >
     <mat-card-content>
       <h2>{{ region }}</h2>

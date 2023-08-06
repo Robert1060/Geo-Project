@@ -13,7 +13,7 @@ import { Currency, ExtendedCountryData } from '../../models/model';
 export class CountryInfoComponent implements OnInit {
   country: string;
   countryInfo$: Observable<ExtendedCountryData[]>;
-  isDataLoading: boolean;
+  isDataLoading: boolean = true;
 
   constructor(
     private activatedRoute: ActivatedRoute,
