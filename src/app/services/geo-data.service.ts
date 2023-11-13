@@ -1,22 +1,23 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BaseCountryData, ExtendedCountryData } from '../models/model';
-import { Observable } from 'rxjs';
+import { Observable, catchError, of, throwError } from 'rxjs';
+import { BaseService } from './base.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class GeoDataService {
-  constructor(private httpClient: HttpClient) {}
+export class GeoDataService extends BaseService {
+  constructor() {super()}
 
   public getCountries(region: string) {
     return this.httpClient.get<BaseCountryData[]>(
-      `https://restcountries.com/v3.1/region/${region}?fields=name,flag`
-    );
+      `${this.rootUrl}region/${region}?fields=name,flag`
+    )
   }
   public getCountryInfo(country: string): Observable<ExtendedCountryData[]> {
     return this.httpClient.get<ExtendedCountryData[]>(
-      `https://restcountries.com/v3.1/name/${country}?fields=flag,name,currencies,capital,population,fifa`
+      `${this.rootUrl}name/${country}?fields=flag,name,currencies,capital,population,fifa`
     );
   }
 }

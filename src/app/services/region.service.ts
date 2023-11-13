@@ -1,6 +1,6 @@
 import { Regions } from '../models/model';
 
-export default class RegionService {
+export abstract class RegionService {
   static regions: Regions = {
     Africa: 'africa',
     Asia: 'asia',

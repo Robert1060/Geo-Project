@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -18,6 +18,9 @@ import { FooterComponent } from './components/footer/footer.component';
 import { AboutMeDialogComponent } from './components/about-me-dialog/about-me-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { CustomErrorHandler } from './handlers/custom-error-handler';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { GlobalHttpErrorHandlerInterceptor } from './handlers/global-http-error-handler.interceptor';
 
 @NgModule({
   declarations: [
@@ -42,8 +45,19 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     MatToolbarModule,
     MatProgressSpinnerModule,
     MatDialogModule,
+    MatSnackBarModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: ErrorHandler,
+      useClass: CustomErrorHandler
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: GlobalHttpErrorHandlerInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

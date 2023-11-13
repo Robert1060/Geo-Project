@@ -4,11 +4,6 @@ import { RegionsComponent } from './regions/regions.component';
 import { RegionsRoutingModule } from './regions/regions-routing.module';
 
 const routes: Routes = [
-  // {
-  //   path: '**',
-  //   pathMatch: 'full',
-  //   redirectTo: 'regions'
-  // },
   {
     path: '',
     redirectTo: 'regions',

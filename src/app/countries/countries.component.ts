@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, finalize, map, of, switchMap, take } from 'rxjs';
+import { Observable, finalize, map, switchMap, take } from 'rxjs';
 import { GeoDataService } from '../services/geo-data.service';
 import { BaseCountryData } from '../models/model';
 
