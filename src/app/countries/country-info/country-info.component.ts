@@ -5,9 +5,10 @@ import { Currency, ExtendedCountryData } from '../../models/model';
 import { CommonModule } from '@angular/common';
 import { LetModule } from '@ngrx/component';
 import { Store } from '@ngrx/store';
-import { selectSelectedCountry } from 'src/app/store/selectors';
+
 import { filterNullable } from '../countries.component';
 import { LoadingComponent } from 'src/app/components/loading/loading.component';
+import { documentFeature } from 'src/app/store/reducer';
 
 @Component({
   selector: 'app-country-info',
@@ -18,7 +19,7 @@ import { LoadingComponent } from 'src/app/components/loading/loading.component';
   imports: [LoadingComponent, CommonModule, LetModule]
 })
 export class CountryInfoComponent implements OnInit {
-  readonly country$ = this.store.select(selectSelectedCountry).pipe(filterNullable())
+  readonly country$ = this.store.select(documentFeature.selectSelectedCountryName).pipe(filterNullable())
   countryInfo$: Observable<ExtendedCountryData[]>;
 
   constructor(

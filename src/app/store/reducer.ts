@@ -1,4 +1,4 @@
-import { createReducer, on } from '@ngrx/store';
+import { createReducer, createSelector, on } from '@ngrx/store';
 import * as actions from './actions';
 import { createFeature } from '@ngrx/store';
 import { ExtendedCountryData, Regions } from 'src/app/models/model';
@@ -7,14 +7,15 @@ export interface DocumentState {
   region: {
     name: Regions | undefined,
     countries: ExtendedCountryData[],
-    selectedCountry?: string
+    selectedCountry: string | undefined
   }
 };
 
 const initialState: DocumentState = {
   region: {
     name: undefined,
-    countries: []
+    countries: [],
+    selectedCountry: undefined
   }
 };
 
@@ -40,8 +41,18 @@ export const documentReducer = createReducer(
   })
 );
 
-export const regionFeature = createFeature({
+export const documentFeature = createFeature({
   name: 'document',
   reducer: documentReducer,
+  extraSelectors: ({selectRegion}) => ({
+    selectSelectedRegionName: createSelector(
+      selectRegion,
+      (state) => state.name
+    ),
+    selectSelectedCountryName: createSelector(
+      selectRegion,
+      (state) => state.selectedCountry
+    )
+  }),
 });
 

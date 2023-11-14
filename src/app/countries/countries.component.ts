@@ -12,11 +12,11 @@ import {
 import { GeoDataService } from '../services/geo-data.service';
 import { BaseCountryData } from '../models/model';
 import { Store } from '@ngrx/store';
-import { selectRegionName } from '../store/selectors';
 import { CommonModule } from '@angular/common';
 import { LetModule } from '@ngrx/component';
 import { chooseCountry } from '../store/actions';
 import { LoadingComponent } from '../components/loading/loading.component';
+import { documentFeature } from '../store/reducer';
 
 @Component({
   selector: 'app-countries',
@@ -28,7 +28,7 @@ import { LoadingComponent } from '../components/loading/loading.component';
 })
 export class RegionCountriesComponent implements OnInit {
   countries$: Observable<BaseCountryData[]>;
-  selectedRegion$ = this.store.select(selectRegionName).pipe(filterNullable());
+  selectedRegion$ = this.store.select(documentFeature.selectSelectedRegionName).pipe(filterNullable());
 
   constructor(
     private geoService: GeoDataService,

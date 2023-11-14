@@ -14,7 +14,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideStore(),
-    provideState(fromRegions.regionFeature),
+    provideState(fromRegions.documentFeature),
     provideAnimations(),
     provideHttpClient(),
     importProvidersFrom(MatSnackBarModule),
