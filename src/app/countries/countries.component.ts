@@ -1,35 +1,57 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Observable, finalize, map, switchMap, take } from 'rxjs';
+import { RouterModule } from '@angular/router';
+import {
+  Observable,
+  OperatorFunction,
+  UnaryFunction,
+  filter,
+  map,
+  pipe,
+  switchMap,
+} from 'rxjs';
 import { GeoDataService } from '../services/geo-data.service';
 import { BaseCountryData } from '../models/model';
+import { Store } from '@ngrx/store';
+import { selectRegionName } from '../store/selectors';
+import { CommonModule } from '@angular/common';
+import { LetModule } from '@ngrx/component';
+import { chooseCountry } from '../store/actions';
+import { LoadingComponent } from '../components/loading/loading.component';
 
 @Component({
   selector: 'app-countries',
   templateUrl: './countries.component.html',
   styleUrls: ['./countries.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [LoadingComponent, CommonModule, RouterModule, LetModule],
 })
 export class RegionCountriesComponent implements OnInit {
   countries$: Observable<BaseCountryData[]>;
-  region: string;
-  isDataLoading: boolean;
+  selectedRegion$ = this.store.select(selectRegionName).pipe(filterNullable());
 
   constructor(
-    private activatedRoute: ActivatedRoute,
-    private geoService: GeoDataService
+    private geoService: GeoDataService,
+    private store: Store
   ) {}
 
   ngOnInit(): void {
-    this.countries$ = this.activatedRoute.params.pipe(
-      take(1),
-      map((x) => x['region']),
-      switchMap((region: string) => {
-        this.region = region;
-        const countries$ = this.geoService.getCountries(region);
-        return countries$;
-      }),
-      finalize(() => (this.isDataLoading = false))
+    this.countries$ = this.selectedRegion$.pipe(
+      switchMap((region) => this.geoService.getCountries(region))
     );
   }
+
+  chooseCountry(countryName: string) {
+    this.store.dispatch(chooseCountry({countryName}))
+  }
+}
+
+export function filterNullable<T>(): UnaryFunction<
+  Observable<T | null | undefined>,
+  Observable<T>
+> {
+  return pipe(
+    map((x) => x),
+    filter((x) => x != null) as OperatorFunction<T | null | undefined, T>
+  );
 }

@@ -6,6 +6,6 @@ import { Injectable, inject } from '@angular/core';
 })
 export abstract class BaseService {
   public httpClient = inject(HttpClient)
-  public readonly rootUrl = 'https://restcountries.com/v3.1/l'
+  public readonly rootUrl = 'https://restcountries.com/v3.1/'
 
 }

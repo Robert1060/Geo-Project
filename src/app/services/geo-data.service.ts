@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BaseCountryData, ExtendedCountryData } from '../models/model';
+import { BaseCountryData, ExtendedCountryData, Regions } from '../models/model';
 import { Observable, catchError, of, throwError } from 'rxjs';
 import { BaseService } from './base.service';
 
@@ -10,7 +10,7 @@ import { BaseService } from './base.service';
 export class GeoDataService extends BaseService {
   constructor() {super()}
 
-  public getCountries(region: string) {
+  public getCountries(region: Regions) {
     return this.httpClient.get<BaseCountryData[]>(
       `${this.rootUrl}region/${region}?fields=name,flag`
     )

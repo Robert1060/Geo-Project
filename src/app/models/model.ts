@@ -1,10 +1,12 @@
-export interface Regions {
-  Africa: string;
-  Asia: string;
-  Europe: string;
-  America: string;
-  Oceania: string;
-}
+export const RegionsV2 = [
+  'Africa',
+  'Asia',
+  'Europe',
+  'America',
+  'Oceania'
+] as const
+
+export type Regions = typeof RegionsV2[number]
 
 export interface Currency {
   name: string;

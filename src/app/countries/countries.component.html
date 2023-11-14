@@ -1,12 +1,16 @@
-<mat-spinner *ngIf="isDataLoading" class="spinner"></mat-spinner>
-<ng-container *ngrxLet="countries$ as countries">
-  <h2 class="header">region: {{ region }}</h2>
+<ng-container *ngIf="countries$ | async; let countries else loadingTemplate">
+  <h2 class="header">region: {{ selectedRegion$ | async }}</h2>
   <div class="table">
     <div class="countries">
-      <a *ngFor="let country of countries" class="country pointer" [routerLink]="country.name.common">
+      <a *ngFor="let country of countries" class="country pointer" [routerLink]="country.name.common"
+        (click)="chooseCountry(country.name.common)">
         <span class="flag">{{ country.flag }}</span>
         <span>{{ country.name.common }}</span>
       </a>
     </div>
   </div>
 </ng-container>
+
+<ng-template #loadingTemplate>
+  <app-loading></app-loading>
+</ng-template>
