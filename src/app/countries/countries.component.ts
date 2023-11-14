@@ -16,7 +16,7 @@ import { CommonModule } from '@angular/common';
 import { LetModule } from '@ngrx/component';
 import { chooseCountry } from '../store/actions';
 import { LoadingComponent } from '../components/loading/loading.component';
-import { documentFeature } from '../store/reducer';
+import { documentFeature } from '../store/state';
 
 @Component({
   selector: 'app-countries',

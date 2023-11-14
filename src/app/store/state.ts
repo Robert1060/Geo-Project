@@ -3,7 +3,7 @@ import * as actions from './actions';
 import { createFeature } from '@ngrx/store';
 import { ExtendedCountryData, Regions } from 'src/app/models/model';
 
-export interface DocumentState {
+interface DocumentState {
   region: {
     name: Regions | undefined,
     countries: ExtendedCountryData[],
@@ -19,7 +19,7 @@ const initialState: DocumentState = {
   }
 };
 
-export const documentReducer = createReducer(
+const documentReducer = createReducer(
   initialState,
   on(actions.chooseRegion, (state, action) => {
     return {
@@ -42,7 +42,7 @@ export const documentReducer = createReducer(
 );
 
 export const documentFeature = createFeature({
-  name: 'document',
+  name: 'document' as const,
   reducer: documentReducer,
   extraSelectors: ({selectRegion}) => ({
     selectSelectedRegionName: createSelector(

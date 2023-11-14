@@ -1,6 +1,6 @@
 import { ApplicationConfig } from '@angular/platform-browser';
 import { StoreRootModule, provideState, provideStore } from '@ngrx/store';
-import * as fromRegions from './store/reducer';
+import * as fromRegions from './store/state';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';

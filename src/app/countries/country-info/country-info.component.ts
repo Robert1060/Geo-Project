@@ -8,7 +8,7 @@ import { Store } from '@ngrx/store';
 
 import { filterNullable } from '../countries.component';
 import { LoadingComponent } from 'src/app/components/loading/loading.component';
-import { documentFeature } from 'src/app/store/reducer';
+import { documentFeature } from 'src/app/store/state';
 
 @Component({
   selector: 'app-country-info',
