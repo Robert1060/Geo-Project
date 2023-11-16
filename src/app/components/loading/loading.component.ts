@@ -7,8 +7,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   imports: [MatProgressSpinnerModule],
   template: `
       <mat-spinner class="spinner"></mat-spinner>
-
-  `
+`
 })
 export class LoadingComponent {
 
