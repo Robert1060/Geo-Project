@@ -1,37 +1,37 @@
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing"
+import { AppComponent } from "./app.component"
+import { Router } from "@angular/router";
+import { Location } from "@angular/common";
 import { RouterTestingModule } from '@angular/router/testing';
-import { AppComponent } from './app.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { MatDialog } from '@angular/material/dialog';
+
 
 describe('AppComponent', () => {
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  let fixture: ComponentFixture<AppComponent>
+  let component: AppComponent;
+  let router: Router
+  let location: Location
+
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
       imports: [RouterTestingModule],
-      providers: [MatDialog],
-      declarations: [AppComponent, NavbarComponent, FooterComponent],
-    }).compileComponents();
-  });
+    }).compileComponents()
+  }))
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  });
 
-  // it(`should have as title 'geo-project'`, () => {
-  //   const fixture = TestBed.createComponent(AppComponent);
-  //   const app = fixture.componentInstance;
-  //   expect(app.title).toEqual('geo-project');
-  // });
-
-  // it('should render title', () => {
-  //   const fixture = TestBed.createComponent(AppComponent);
-  //   fixture.detectChanges();
-  //   const compiled = fixture.nativeElement as HTMLElement;
-  //   expect(compiled.querySelector('.content span')?.textContent).toContain(
-  //     'geo-project app is running!'
-  //   );
-  // });
-});
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AppComponent)
+    component = fixture.componentInstance;
+    router = TestBed.inject(Router)
+    location = TestBed.inject(Location)
+    fixture.autoDetectChanges()
+  })
+  
+  it('Should create app', () => {
+    expect(component).toBeTruthy()
+  })
+  it('Should have proper url', () => {
+    spyOn(location, 'path').and.returnValue('/regions')
+    const isProperUrl = location.path().endsWith('/regions')
+    expect(isProperUrl).toBeTruthy()
+  })
+})

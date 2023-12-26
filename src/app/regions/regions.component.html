@@ -1,6 +1,5 @@
 <div class="regions-wrapper">
-  <mat-card *ngFor="let region of regions" class="region pointer" routerLink="{{ region.toLowerCase() }}"
-    (click)="chooseRegion(region)">
+  <mat-card *ngFor="let region of regions" class="region pointer" routerLink="{{ region.toLowerCase() }}">
     <mat-card-content>
       <h2>{{ region }}</h2>
     </mat-card-content>

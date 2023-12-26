@@ -1,3 +1,5 @@
+// DECIDED TO NOT USE STORE BECAUSE OF MUST SAVING DATA IN LOCAL STORAGE  
+
 import { createReducer, createSelector, on } from '@ngrx/store';
 import * as actions from './actions';
 import { createFeature } from '@ngrx/store';

@@ -1,22 +1,16 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import {
   Observable,
-  OperatorFunction,
-  UnaryFunction,
-  filter,
   map,
-  pipe,
   switchMap,
+  take,
 } from 'rxjs';
 import { GeoDataService } from '../services/geo-data.service';
-import { BaseCountryData } from '../models/model';
-import { Store } from '@ngrx/store';
+import { BaseCountryData, Regions } from '../models/model';
 import { CommonModule } from '@angular/common';
 import { LetModule } from '@ngrx/component';
-import { chooseCountry } from '../store/actions';
 import { LoadingComponent } from '../components/loading/loading.component';
-import { documentFeature } from '../store/state';
 
 @Component({
   selector: 'app-countries',
@@ -28,30 +22,23 @@ import { documentFeature } from '../store/state';
 })
 export class RegionCountriesComponent implements OnInit {
   countries$: Observable<BaseCountryData[]>;
-  selectedRegion$ = this.store.select(documentFeature.selectSelectedRegionName).pipe(filterNullable());
+  region: Regions
 
   constructor(
     private geoService: GeoDataService,
-    private store: Store
+    private activateRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.countries$ = this.selectedRegion$.pipe(
-      switchMap((region) => this.geoService.getCountries(region))
-    );
+    this.countries$ = this.activateRoute.params.pipe(
+      take(1),
+      map((x) => x['region']),
+      switchMap((regionName: Regions ) => {
+        this.region = regionName
+        return this.geoService.getCountries(regionName)
+      })
+    )
   }
 
-  chooseCountry(countryName: string) {
-    this.store.dispatch(chooseCountry({countryName}))
-  }
 }
 
-export function filterNullable<T>(): UnaryFunction<
-  Observable<T | null | undefined>,
-  Observable<T>
-> {
-  return pipe(
-    map((x) => x),
-    filter((x) => x != null) as OperatorFunction<T | null | undefined, T>
-  );
-}

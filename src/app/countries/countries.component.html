@@ -1,9 +1,8 @@
 <ng-container *ngIf="countries$ | async; let countries else loadingTemplate">
-  <h2 class="header">region: {{ selectedRegion$ | async }}</h2>
+  <h2 class="header">region: {{ region }}</h2>
   <div class="table">
     <div class="countries">
-      <a *ngFor="let country of countries" class="country pointer" [routerLink]="country.name.common"
-        (click)="chooseCountry(country.name.common)">
+      <a *ngFor="let country of countries" class="country pointer" [routerLink]="country.name.common">
         <span class="flag">{{ country.flag }}</span>
         <span>{{ country.name.common }}</span>
       </a>

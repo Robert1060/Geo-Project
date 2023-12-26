@@ -1,14 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Observable, switchMap } from 'rxjs';
+import { Observable, map, switchMap, take } from 'rxjs';
 import { GeoDataService } from '../../services/geo-data.service';
 import { Currency, ExtendedCountryData } from '../../models/model';
 import { CommonModule } from '@angular/common';
 import { LetModule } from '@ngrx/component';
-import { Store } from '@ngrx/store';
-
-import { filterNullable } from '../countries.component';
 import { LoadingComponent } from 'src/app/components/loading/loading.component';
-import { documentFeature } from 'src/app/store/state';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-country-info',
@@ -19,12 +16,11 @@ import { documentFeature } from 'src/app/store/state';
   imports: [LoadingComponent, CommonModule, LetModule]
 })
 export class CountryInfoComponent implements OnInit {
-  readonly country$ = this.store.select(documentFeature.selectSelectedCountryName).pipe(filterNullable())
-  countryInfo$: Observable<ExtendedCountryData[]>;
-
+  public country: string
+  public countryInfo$:Observable<ExtendedCountryData[]>
   constructor(
-    private store: Store,
-    private geoService: GeoDataService
+    private geoService: GeoDataService,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   getCurrency(countryInfo: ExtendedCountryData): Currency {
@@ -49,8 +45,13 @@ export class CountryInfoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.countryInfo$ = this.country$.pipe(
-      switchMap((country: string) => this.geoService.getCountryInfo(country)),
-    );
+    this.countryInfo$ = this.activatedRoute.params.pipe(
+      take(1),
+      map((x) => x['country']),
+      switchMap((country) => {
+        this.country = country
+        return this.geoService.getCountryInfo(country)
+      })
+    )
   }
 }

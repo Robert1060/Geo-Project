@@ -1,5 +1,5 @@
 <ng-container *ngIf="countryInfo$ | async; let info else loadingTemplate">
-  <h2 class="header">country: {{ country$ | async }}</h2>
+  <h2 class="header">country: {{ country }}</h2>
   <div class="table" *ngFor="let countryInfo of info">
     <div class="countries">
       <div class="label">
