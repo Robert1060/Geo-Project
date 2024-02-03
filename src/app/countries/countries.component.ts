@@ -9,8 +9,8 @@ import {
 import { GeoDataService } from '../services/geo-data.service';
 import { BaseCountryData, Regions } from '../models/model';
 import { CommonModule } from '@angular/common';
-import { LetModule } from '@ngrx/component';
 import { LoadingComponent } from '../components/loading/loading.component';
+import { LetDirective } from '@ngrx/component';
 
 @Component({
   selector: 'app-countries',
@@ -18,7 +18,7 @@ import { LoadingComponent } from '../components/loading/loading.component';
   styleUrls: ['./countries.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [LoadingComponent, CommonModule, RouterModule, LetModule],
+  imports: [LoadingComponent, CommonModule, RouterModule, LetDirective],
 })
 export class RegionCountriesComponent implements OnInit {
   countries$: Observable<BaseCountryData[]>;

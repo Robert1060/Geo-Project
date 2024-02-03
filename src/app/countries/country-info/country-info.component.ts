@@ -3,9 +3,10 @@ import { Observable, map, switchMap, take } from 'rxjs';
 import { GeoDataService } from '../../services/geo-data.service';
 import { Currency, ExtendedCountryData } from '../../models/model';
 import { CommonModule } from '@angular/common';
-import { LetModule } from '@ngrx/component';
+
 import { LoadingComponent } from 'src/app/components/loading/loading.component';
 import { ActivatedRoute } from '@angular/router';
+import { LetDirective } from '@ngrx/component';
 
 @Component({
   selector: 'app-country-info',
@@ -13,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./country-info.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [LoadingComponent, CommonModule, LetModule]
+  imports: [LoadingComponent, CommonModule, LetDirective]
 })
 export class CountryInfoComponent implements OnInit {
   public country: string
