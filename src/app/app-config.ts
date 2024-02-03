@@ -1,4 +1,4 @@
-import { ApplicationConfig } from '@angular/platform-browser';
+import { ApplicationConfig } from '@angular/core'
 import { provideState, provideStore } from '@ngrx/store';
 import * as fromRegions from './store/state';
 import { provideAnimations } from '@angular/platform-browser/animations';
