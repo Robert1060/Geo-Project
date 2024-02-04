@@ -1,16 +1,14 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
-import {
-  Observable,
-  map,
-  switchMap,
-  take,
-} from 'rxjs';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { filter, switchMap } from 'rxjs';
 import { GeoDataService } from '../services/geo-data.service';
-import { BaseCountryData, Regions } from '../models/model';
 import { CommonModule } from '@angular/common';
 import { LoadingComponent } from '../components/loading/loading.component';
 import { LetDirective } from '@ngrx/component';
+import { documentFeature } from '../store/state';
+import { Store } from '@ngrx/store';
+import { isNotNull } from 'utils';
+import { attemptToChooseCountry, loadStoredRegion } from '../store/actions';
 
 @Component({
   selector: 'app-countries',
@@ -20,25 +18,18 @@ import { LetDirective } from '@ngrx/component';
   standalone: true,
   imports: [LoadingComponent, CommonModule, RouterModule, LetDirective],
 })
-export class RegionCountriesComponent implements OnInit {
-  countries$: Observable<BaseCountryData[]>;
-  region: Regions
+export class RegionCountriesComponent {
+  selectedRegion$ = this.store.select(documentFeature.selectSelectedRegionName);
+  countries$ = this.selectedRegion$.pipe(
+    filter(isNotNull),
+    switchMap((regionName) => this.geoService.getCountries(regionName))
+  );
 
-  constructor(
-    private geoService: GeoDataService,
-    private activateRoute: ActivatedRoute
-  ) {}
-
-  ngOnInit(): void {
-    this.countries$ = this.activateRoute.params.pipe(
-      take(1),
-      map((x) => x['region']),
-      switchMap((regionName: Regions ) => {
-        this.region = regionName
-        return this.geoService.getCountries(regionName)
-      })
-    )
+  constructor(private geoService: GeoDataService, private store: Store) {
+    this.store.dispatch(loadStoredRegion());
   }
 
+  chooseCountry(countryName: string) {
+    this.store.dispatch(attemptToChooseCountry({ countryName }));
+  }
 }
-

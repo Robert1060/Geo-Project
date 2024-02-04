@@ -2,6 +2,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Regions } from '../models/model';
+import { Store } from '@ngrx/store';
+import { attemptToChooseRegion } from '../store/actions';
+import { AuthService } from '../services/auth-service';
 
 @Component({
   selector: 'app-regions',
@@ -20,6 +24,14 @@ export class RegionsComponent {
     'Oceania',
   ] as const;
 
-  constructor() { }
+  constructor(private store: Store, private authService: AuthService) { 
+    localStorage.clear()
+  }
+
+  chooseRegion(regionName: Regions) {
+    this.authService.login()
+    this.store.dispatch(attemptToChooseRegion({regionName}))
+  }
+
 }
 

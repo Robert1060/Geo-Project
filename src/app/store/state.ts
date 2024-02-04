@@ -1,27 +1,23 @@
-// DECIDED TO NOT USE STORE BECAUSE OF MUST SAVING DATA IN LOCAL STORAGE  
-
 import { createReducer, createSelector, on } from '@ngrx/store';
 import * as actions from './actions';
 import { createFeature } from '@ngrx/store';
-import { ExtendedCountryData, Regions } from 'src/app/models/model';
+import { Regions } from 'src/app/models/model';
 
 interface DocumentState {
   region: {
-    name: Regions | undefined,
-    countries: ExtendedCountryData[],
-    selectedCountry: string | undefined
+    name?: Regions,
+    selectedCountry?: string
   }
 };
 
 const initialState: DocumentState = {
   region: {
     name: undefined,
-    countries: [],
     selectedCountry: undefined
   }
 };
 
-const documentReducer = createReducer(
+export const documentReducer = createReducer(
   initialState,
   on(actions.chooseRegion, (state, action) => {
     return {
@@ -49,11 +45,11 @@ export const documentFeature = createFeature({
   extraSelectors: ({selectRegion}) => ({
     selectSelectedRegionName: createSelector(
       selectRegion,
-      (state) => state.name
+      (state) => state?.name
     ),
     selectSelectedCountryName: createSelector(
       selectRegion,
-      (state) => state.selectedCountry
+      (state) => state?.selectedCountry
     )
   }),
 });
